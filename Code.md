@@ -3,7 +3,7 @@
 #include <conio.h>
 
     void anim()
-    { while (!kbhit())
+    { while (1)
     {
         system("cls");
         printf("Playing.\n\n"
@@ -32,6 +32,7 @@ int main()
 
     char songname[50];
     char input[50];
+    char filepath [50];
 
     while (1)
     {
@@ -52,12 +53,30 @@ int main()
               "----------------\n");
 
         scanf(" %[^\n]", songname);
+
+        sprintf(filepath, "Music\\%s", songname);
+
+        FILE *file = fopen(filepath, "r");
+
         if (strcmp(songname, "exit") == 0)
         {
             break;
         }
 
+        if (file == NULL)
+        {
+            printf("\nTrack name not found.\n");
+            printf("Press any key to continue...\n");
+            getch();
+            continue;
+        }
+        else
+        {
+           fclose(file);
+        }
+
         sprintf(input, "start Music\\\"%s\"", songname);
+
         system(input);
        anim();
     }
