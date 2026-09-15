@@ -30,9 +30,8 @@ int main()
 {
     system("chcp 65001 > nul");
 
-    char songname[50];
-    char input[50];
-    char filepath [50];
+    char songname[100];
+    char input[100];
 
     while (1)
     {
@@ -54,28 +53,9 @@ int main()
 
         scanf(" %[^\n]", songname);
 
-        sprintf(filepath, "Music\\%s", songname);
+        if (strcmp(input, "exit") == 0) break;
 
-        FILE *file = fopen(filepath, "r");
-
-        if (strcmp(songname, "exit") == 0)
-        {
-            break;
-        }
-
-        if (file == NULL)
-        {
-            printf("\nTrack name not found.\n");
-            printf("Press any key to continue...\n");
-            getch();
-            continue;
-        }
-        else
-        {
-           fclose(file);
-        }
-
-        sprintf(input, "start Music\\\"%s\"", songname);
+        sprintf(input, "start Music\\%s", songname);
 
         system(input);
        anim();
